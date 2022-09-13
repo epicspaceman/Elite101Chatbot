@@ -8,9 +8,12 @@ user_name = input("Hello, what\'s your name? ")
 user_response = ''
 
 
-functions = [fn.location_question, fn.hobby_question, fn.user_age]
+functions = [fn.location_question, fn.hobby_question, fn.users_age, fn.user_feeling]
 
 while user_response != 'no':
-  random.choice(functions)(user_name, generic_responses, positive_responses, negative_responses)
+  random.choice(functions)(user_name, generic_responses, positive_responses, negative_responses, functions)
+  if len(functions) == 0:
+    break
   user_response = input("Would you like to continue our chat? ")
+  
 

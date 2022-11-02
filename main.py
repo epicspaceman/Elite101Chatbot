@@ -1,19 +1,20 @@
 import random
-import functions as fn
+import library_bot as lb
 
-generic_responses = ['That\'s so cool!', 'Interesting!', 'Really?']
-negative_responses = ['bad', 'disappointing', 'depressing', 'sucks', 'i hate it']
-positive_responses = ['good', 'i like it' ]
-user_name = input("Hello, what\'s your name? ")
-user_response = ''
+user_ID = int(input("Hi, I'm BookBot, here to help you navigate _____ Public Library! Please enter your library card ID\n"))
 
+bot = lb.library_bot(user_ID)
+bot.user_feeling()
+bot.check_overdue()
 
-functions = [fn.location_question, fn.hobby_question, fn.users_age, fn.user_feeling]
-
-while user_response != 'no':
-  random.choice(functions)(user_name, generic_responses, positive_responses, negative_responses, functions)
-  if len(functions) == 0:
-    break
-  user_response = input("Would you like to continue our chat? ")
-  
+def next_action():
+  user_req = input("What would you like me to do? I can, check if you have any books overdue, find a library location, or find a book or author based on title or author. [Overdue | Location | Search]")
+  if user_req == "Location":
+    zip_code = input("Please enter your zip code")
+    bot.find_location(zip_code)
+  elif user_req == "Overdue":
+    bot.check_overdue()
+  elif user_req == "Search":
+    query = input("Please enter a author or book title.")
+    bot.find_book(query)
 
